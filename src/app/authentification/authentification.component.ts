@@ -15,24 +15,24 @@ export class AuthentificationComponent implements OnInit {
   errors : any = {};
 
   submitted = false;
-  client !: FormGroup;
+  backoffice !: FormGroup;
 
   constructor(private formBuilder : FormBuilder,
     private router:Router,
     private authService : AuthenticationService,private _http: HttpClient) { }
 
   ngOnInit(): void {
-    this.client = this.formBuilder.group({
+    this.backoffice = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password : ['', Validators.required]
     });
   }
 
   onSubmit(){
-    if(this.client.value.email!=""){
+    if(this.backoffice.value.email!=""){
       this.authService.login({
-        "email": this.client.value.email,
-        "password": this.client.value.password
+        "email": this.backoffice.value.email,
+        "password": this.backoffice.value.password
       }).subscribe( (response : any) => {
         this.errors = {};
         if(response.message){
@@ -50,11 +50,11 @@ export class AuthentificationComponent implements OnInit {
   }
 
   invalidPassword():boolean{
-  	return (this.submitted && (this.errors.pwd != null || this.client.controls.pwd.errors != null ));
+  	return (this.submitted && (this.errors.pwd != null || this.backoffice.controls.pwd.errors != null ));
   }
 
   invalidEmailUtili():boolean{
-  	return (this.submitted &&  (this.errors.email != null || this.client.controls.email.errors != null));
+  	return (this.submitted &&  (this.errors.email != null || this.backoffice.controls.email.errors != null));
   }
 
 }
