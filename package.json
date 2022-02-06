@@ -1,5 +1,5 @@
 {
-  "name": "angularspring",
+  "name": "backoffice",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,8 @@
     "build": "ng build --prod --aot=true --build-optimizer=true",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "heroku-postbuild": "ng build — prod"
   },
   "private": true,
   "dependencies": {
@@ -26,10 +27,11 @@
     "@types/jquery": "^3.5.5",
     "bootstrap": "^5.0.1",
     "crypto-js": "^4.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "jquery": "^3.6.0",
     "ngp-sort-pipe": "0.0.4",
     "ngx-pagination": "^5.1.0",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
