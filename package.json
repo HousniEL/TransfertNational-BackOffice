@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod --aot=true --build-optimizer=true",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "postinstall": "ngcc",
