@@ -1,0 +1,118 @@
+import { HttpParams } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MultiTransfer } from 'src/Models/Transfer';
+import { AuthenticationService } from '../services/authentication.service';
+import { MultitransfersService } from '../services/multitransfers.service';
+
+@Component({
+  selector: 'app-view-transfers',
+  templateUrl: './view-transfers.component.html',
+  styleUrls: ['./view-transfers.component.css']
+})
+export class ViewTransfersComponent implements OnInit {
+
+
+  multitransfers : MultiTransfer[] = [
+    {
+      sender_fname : "Housni",
+      sender_lname : "Elaich",
+      sender_phnumber : "0607360043",
+      id_multitransfer : 45,
+      transfers : [
+        {
+          id_transfer : 112,
+          code_pin : "2323",
+          received_at : new Date("14/01/2022"),
+          receiver_fname : "Soukaina",
+          receiver_lname : "Rhasri",
+          receiver_phnumber :"0617901909",
+          transfer_amount : 800,
+          transfer_reference : "113",
+          transfer_status : 3
+        }
+      ],
+      created_at : new Date(),
+      ended_at : new Date(),
+      expense_id : 2,
+      motif : "Cadeau",
+      notify_transfer : true,
+      request_by_prospect_client : true,
+      sended_by_agent : 2,
+      transfer_by_cash : true,
+      total_amount : 5000,
+      total_expense_amount : 350,
+    }
+  ];
+
+  totalRecords ?: any;
+  page : number = 1;
+  reference ?: string;
+
+  errorReference = "";
+
+
+
+  constructor(private route: ActivatedRoute,
+    private multitransfersService :MultitransfersService
+    ,private authservice : AuthenticationService) {
+    /*this.route.queryParams.subscribe(params => {
+      if(params['page'] != undefined) this.page = params['page'];
+    });
+    this.getTransfers(this.page);*/
+  }
+
+  ngOnInit(): void {
+    /*this.multitransfersService.countMultitransfer_byAgent().subscribe((data:any) => {
+      this.totalRecords = data;
+      }, (error:any) => {
+      });*/
+  }
+
+  getTransfers(currentpage:number){
+      /*this.multitransfersService.GetMultitransfer_byAgent(currentpage).subscribe((data2:any) => {
+        this.multitransfers = data2;
+      }, (error:any) => {
+        console.log(error);
+      });*/
+  }
+
+  changepage(currentpage:any){
+    console.log(currentpage);
+    this.page = currentpage;
+    var current_path = location.protocol + '//' + location.host + location.pathname;
+    window.location.href = current_path+"?page="+currentpage;
+  }
+  
+
+  restituer_transfers(multT:any){
+    let tmp = this.multitransfers[multT];
+    tmp.transfers = tmp.transfers.filter((transf:any) => {
+        transf["transfer_status"] = 4
+        return transf.transfer_status==4;
+      });
+    let index = this.multitransfers.indexOf(tmp);
+    this.multitransfers[index] = tmp;
+
+    console.log(this.multitransfers)
+  }
+
+
+
+  invalidReference(){
+    return this.errorReference != "";
+  }
+
+
+  chercher(){
+    this.errorReference="";
+    if(!this.reference) this.errorReference="Champ vide !"
+    else{
+      this.multitransfersService.GetMultitransfer_byreference(this.reference).subscribe((data:any) => {
+          window.location.href="/infos_Transfert/"+this.reference;
+      }, (error:any) => {
+        this.errorReference = error.error.error;
+      });
+    }
+  }
+}

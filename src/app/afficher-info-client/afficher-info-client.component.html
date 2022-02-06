@@ -1,0 +1,67 @@
+<div class="container account">
+  <div class="row" *ngIf="Clients.length !== 0">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Chercher par CIN"
+      aria-label="Nom"
+      [(ngModel)]="recherche"
+      [ngClass]="{ 'is-invalid': invalidRecherche() }"
+      autocomplete="off"
+    />
+    <button
+      type="submit"
+      id="chercher"
+      (click)="chercher()"
+      style="margin-right: 4px"
+    >
+      Chercher
+    </button>
+    <p class="errorS" [ngClass]="{ set: invalidRecherche() }">
+      {{ errorRecherche }}
+    </p>
+  </div>
+  <div class="row" *ngIf="Clients.length !== 0">
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nom Complet</th>
+            <th scope="col">CIN</th>
+            <th scope="col">Numéro de téléphone</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="test1" *ngFor="let client of Clients; let i = index">
+            <th scope="row">{{ client.firstName }} {{ client.lastName }}</th>
+            <td style="align-items: center">{{ client.idCard }}</td>
+            <td style="align-items: center">{{ client.phoneNumber }}</td>
+            <td style="align-items: center">{{ client.email }}</td>
+            <td>
+              <button routerLink="client/5" (click)="Pass(client.idCard)">
+                Plus d'infos
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <br />
+        <!--<pagination-controls
+          *ngIf="totalRecords! >= 7"
+          id="listing_pagination"
+          (pageChange)="changepage($event)"
+        ></pagination-controls>-->
+      </div>
+    </div>
+  </div>
+  <div
+    style="display: flex; justify-content: center; margin-top: 20px"
+    *ngIf="Clients.length === 0"
+  >
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+  </div>
+</div>

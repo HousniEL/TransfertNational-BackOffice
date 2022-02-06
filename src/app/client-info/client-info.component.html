@@ -1,0 +1,140 @@
+<div class="container_kyc_table">
+  <div class="row" *ngIf="Client">
+    <div id="main-header">
+      <div>Les informations du client</div>
+      <div *ngIf="bloque" id="status-bloquee">Dans la liste noire</div>
+    </div>
+  </div>
+  <div class="row" *ngIf="Client">
+    <div class="col">
+      <table class="table pb-4">
+        <tbody>
+          <tr>
+            <td class="libelle">Nom complet</td>
+            <td class="pos">
+              {{ Client?.firstName }}
+              {{ Client?.lastName }}
+            </td>
+          </tr>
+          <tr>
+            <td class="libelle">Numéro d'identité</td>
+            <td class="pos">
+              {{ Client?.idCard }}
+            </td>
+          </tr>
+          <tr>
+            <td class="libelle">Année de naissance</td>
+            <td class="pos">{{ Client?.birthday }}</td>
+          </tr>
+          <tr>
+            <td class="libelle">Numéro de téléphone</td>
+            <td class="pos">
+              {{ Client?.phoneNumber }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table pb-4">
+        <tbody>
+          <tr>
+            <td class="libelle">Adresse</td>
+            <td class="pos">{{ Client?.address }}</td>
+          </tr>
+          <tr>
+            <td class="libelle">Pays</td>
+            <td class="pos">
+              {{ Client?.country }}
+            </td>
+          </tr>
+          <tr>
+            <td class="libelle">Ville</td>
+            <td class="pos">
+              {{ Client?.city }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr; place-items: center">
+      <button
+        title="Ajouter à la liste noire"
+        type="button"
+        class="btn btn-danger"
+        data-toggle="modal"
+        data-target="#verifierDecision"
+        *ngIf="!bloque"
+      >
+        Ajouter à la liste noire
+      </button>
+      <button
+        title="Supprimer à la liste noire"
+        type="button"
+        class="btn btn-success"
+        data-toggle="modal"
+        data-target="#verifierDecision"
+        *ngIf="bloque"
+      >
+        Supprimer de la liste noire
+      </button>
+    </div>
+  </div>
+  <div
+    style="display: flex; justify-content: center; margin-top: 20px"
+    *ngIf="!Client"
+  >
+    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="verifierDecision"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="verifierDecision"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <h6 *ngIf="!bloque">
+            Êtes-vous sûr de vouloir ajouter "{{ Client?.firstName }}
+            {{ Client?.lastName }}" à la liste noire ?
+          </h6>
+          <h6 *ngIf="bloque">
+            Êtes-vous sûr de vouloir Supprimer "{{ Client?.firstName }}
+            {{ Client?.lastName }}" de la liste noire ?
+          </h6>
+        </div>
+      </div>
+      <div class="model-body">
+        <button
+          title="Annuler"
+          type="button"
+          class="btn btn-secondary"
+          data-toggle="modal"
+          data-target="#verifierDecision"
+        >
+          Non
+        </button>
+        <button
+          title="Ajouter à la liste noire"
+          type="button"
+          class="btn"
+          [ngClass]="{
+            'btn-success': bloque,
+            'btn-danger': !bloque
+          }"
+          data-toggle="modal"
+          data-target="#verifierDecision"
+          (click)="bloque ? debloquer() : bloquer()"
+        >
+          Oui
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
