@@ -48,22 +48,22 @@ export class AfficherInfoClientComponent implements OnInit {
   }
 
   chercher(){
-    var transfer : any = document.getElementById("chercher");
-    transfer.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
-    transfer.setAttribute('disabled', true);
+    var chercherBtn : any = document.getElementById("chercher");
+    chercherBtn.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
+    chercherBtn.setAttribute('disabled', true);
     this.errorRecherche="";
     if(!this.recherche){
       this.errorRecherche="Champ vide!";
-      transfer.innerHTML = "Chercher";
-      transfer.removeAttribute("disabled");
+      chercherBtn.innerHTML = "Chercher";
+      chercherBtn.removeAttribute("disabled");
     }
     else{
       this.clientService.getClientByCin(this.recherche).subscribe(val => {
         this.router.navigate(['clients-list/'+this.recherche]);
       }, err => {
         this.errorRecherche = err.error.error;
-        transfer.innerHTML = "Chercher";
-        transfer.removeAttribute("disabled");
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
       })
     }
   }

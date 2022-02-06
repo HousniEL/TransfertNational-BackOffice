@@ -21,40 +21,35 @@
               style="display: flex; flex-direction: column; align-items: center"
             >
               <div
-                class="form-ligne"
-                [ngClass]="{ 'has-error': invalidEmailUtili() }"
+                id="error-container"
+                *ngIf="invalidEmailUtili() || invalidPassword() || errors"
               >
+                Email ou mot de passe incorrect.
+              </div>
+              <div class="form-ligne">
                 <div>
                   <input
                     type="text"
                     formControlName="email"
                     name="email"
                     id="email"
-                    [ngClass]="{ 'is-invalid': invalidEmailUtili() }"
                     class="form-control input-text"
                     placeholder="Email"
                     autocomplete="off"
                   />
-                  <p class="error" [ngClass]="{ set: invalidEmailUtili() }">
-                    {{ errors.email || "Champ Invalid !" }}
-                  </p>
                 </div>
               </div>
-              <div class="form-ligne" [ngClass]="{ 'has-error': false }">
+              <div class="form-ligne">
                 <div>
                   <input
                     type="password"
                     formControlName="password"
                     name="password"
                     id="password"
-                    [ngClass]="{ 'is-invalid': false }"
                     class="form-control input-text"
                     placeholder="Mot de passe"
                     aria-describedby="noticepwd"
                   />
-                  <p class="error" [ngClass]="{ set: false }">
-                    {{ "Mot de passe incorrect !" }}
-                  </p>
                 </div>
               </div>
               <div class="form-dern-ligne">

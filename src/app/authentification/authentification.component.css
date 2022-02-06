@@ -12,16 +12,13 @@ body{
 }
 
 
-.error{
-  display: none;
-  width: 100%;
-  font-size: .875em;
-  font-weight: 800;
-  color: #dc3545;
-}
-
-.error.set{
-  display: block;
+#error-container{
+  background-color: #df5361;
+  color: white;
+  width: 85%;
+  padding: .7rem 1rem;
+  font-size: .8rem;
+  margin-bottom: 1rem;
 }
 
 .card {

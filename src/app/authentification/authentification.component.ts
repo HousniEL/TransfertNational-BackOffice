@@ -1,9 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentification',
@@ -12,14 +9,13 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AuthentificationComponent implements OnInit {
 
-  errors : any = {};
+  errors : any = false;
 
   submitted = false;
   backoffice !: FormGroup;
 
   constructor(private formBuilder : FormBuilder,
-    private router:Router,
-    private authService : AuthenticationService,private _http: HttpClient) { }
+    private authService : AuthenticationService) { }
 
   ngOnInit(): void {
     this.backoffice = this.formBuilder.group({
@@ -29,12 +25,23 @@ export class AuthentificationComponent implements OnInit {
   }
 
   onSubmit(){
+    var authBtn : any = document.getElementsByClassName("auth")[0];
+    authBtn.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
+    authBtn.setAttribute('disabled', true);
+    this.errors = false;
+    this.submitted=true;
+    if( this.backoffice.invalid ){
+      authBtn.innerHTML = "S'Authentifier";
+      authBtn.removeAttribute('disabled');
+      return;
+    }
     if(this.backoffice.value.email!=""){
       this.authService.login({
         "email": this.backoffice.value.email,
         "password": this.backoffice.value.password
       }).subscribe( (response : any) => {
-        this.errors = {};
+        authBtn.innerHTML = "S'Authentifier";
+        authBtn.removeAttribute('disabled');
         if(response.message){
         } else {
           window.localStorage.setItem('token',response.token);
@@ -42,19 +49,19 @@ export class AuthentificationComponent implements OnInit {
           window.location.reload();
         }
       }, (error:any) => {
-        this.errors.email="invalide email !"
-        this.errors.pwd="Mot de passe incorrect !"
+        this.errors = true;
+        authBtn.innerHTML = "S'Authentifier";
+        authBtn.removeAttribute('disabled');
       });
     }
-    this.submitted=true;
   }
 
   invalidPassword():boolean{
-  	return (this.submitted && (this.errors.pwd != null || this.backoffice.controls.pwd.errors != null ));
+  	return (this.submitted && this.backoffice.controls.password.errors != null );
   }
 
   invalidEmailUtili():boolean{
-  	return (this.submitted &&  (this.errors.email != null || this.backoffice.controls.email.errors != null));
+  	return (this.submitted &&  this.backoffice.controls.email.errors != null);
   }
 
 }
