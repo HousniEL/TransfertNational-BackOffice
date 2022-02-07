@@ -44,6 +44,7 @@ import { AddBeneficiaryComponent } from './make-transfert/transfert-form/add-ben
 import { BeneficiariesListComponent } from './make-transfert/transfert-form/beneficiaries-list/beneficiaries-list.component';
 import { ExtourneComponent } from './extourne/extourne.component';
 import { ExtourneModalComponent } from './extourne/extourne-modal/extourne-modal.component';
+import { BloquerModalComponent } from './extourne/bloquer-modal/bloquer-modal.component';
 
 
 
@@ -54,7 +55,7 @@ import { ExtourneModalComponent } from './extourne/extourne-modal/extourne-modal
     NavMatComponent,
     AuthentificationComponent,
     ProfilComponent,TransfertInfoComponent,TransfertListComponent,ClientInfoComponent,ChangeStatComponent, BlacklistComponent, MakeTransfertComponent, KycTableComponent, SearchByCinComponent, SetSenderKycInfosComponent, TransferByAccountDebitComponent, TransferByCashComponent
-    ,ViewTransfersComponent,TransferInfosComponent, AfficherInfoClientComponent, MainComponent, AddBeneficiaryComponent, BeneficiariesListComponent, ExtourneComponent, ExtourneModalComponent
+    ,ViewTransfersComponent,TransferInfosComponent, AfficherInfoClientComponent, MainComponent, AddBeneficiaryComponent, BeneficiariesListComponent, ExtourneComponent, ExtourneModalComponent, BloquerModalComponent
   ],
 
   imports: [

@@ -4,6 +4,13 @@
     <button
       *ngIf="blqstatus()"
       data-toggle="modal"
+      data-target="#bloquer-modal"
+    >
+      Bloquer
+    </button>
+    <button
+      *ngIf="blqstatus()"
+      data-toggle="modal"
       data-target="#extourner-modal"
     >
       Extourner
@@ -32,6 +39,24 @@
         [reference]="reference"
         (extort_transfer)="setExtortTransfer($event)"
       ></app-extourne-modal>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="bloquer-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document" style="width: 80%">
+    <div class="modal-content">
+      <app-bloquer-modal
+        [reference]="reference"
+        (extort_transfer)="setExtortTransfer($event)"
+      ></app-bloquer-modal>
     </div>
   </div>
 </div>

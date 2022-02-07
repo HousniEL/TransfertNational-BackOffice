@@ -39,11 +39,11 @@ export class MultitransfersService {
   }
 
   public BloqueTransfer_byreference(reference: any,motif :string) {
-    return this._http.put(this.baseUrl+"UniqueTransfer/extort/"+reference+"?motif="+motif,{});
+    return this._http.put(this.baseUrl+"UniqueTransfer/bloque/"+reference+"?motif="+motif,{});
   }
 
   public DebloqueTransfer_byreference(reference: any,motif :string) {
-    return this._http.put(this.baseUrl+"UniqueTransfer/extort/"+reference+"?motif="+motif,{});
+    return this._http.put(this.baseUrl+"UniqueTransfer/unlock/"+reference+"?motif="+motif,{});
   }
 
   public ExtortTransfer_byreference(reference: any,motif :string) {

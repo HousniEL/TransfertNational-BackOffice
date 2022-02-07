@@ -148,10 +148,6 @@ button{
   background-color: var(--first-color);
 }
 
-button:hover{
-  background-color: rgb(74, 182, 201);
-}
-
 .error{
   width: 100%;
   font-size: 1.1em;
