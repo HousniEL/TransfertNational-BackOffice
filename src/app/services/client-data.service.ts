@@ -8,7 +8,7 @@ import { Client, Compte } from 'src/Models/agent';
 })
 export class ClientDataService {
 
-  Baseurl : string = "http://192.168.1.101:8083/api_backoffice/";
+  Baseurl : string = "https://ensa-api-transfer.herokuapp.com/api_backoffice/";
 
   constructor(private _http:HttpClient) { }
 
