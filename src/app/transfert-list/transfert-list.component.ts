@@ -92,13 +92,24 @@ export class TransfertListComponent implements OnInit {
 
 
   chercher(){
+    var chercherBtn : any = document.getElementById("chercher-transfert");
+    chercherBtn.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
+    chercherBtn.setAttribute('disabled', true);
     this.errorReference="";
-    if(!this.reference) this.errorReference="Champ vide !"
+    if(!this.reference){
+      this.errorReference="Champ vide !";
+      chercherBtn.innerHTML = "Chercher";
+      chercherBtn.removeAttribute("disabled");
+    }
     else{
       this.transferService.GetMultitransfer_byreference(this.reference).subscribe((data:any) => {
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
         window.location.href="/extourne_transfert/"+this.reference;
       }, (error:any) => {
         this.errorReference = error.error.error;
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
       });
     }
   }

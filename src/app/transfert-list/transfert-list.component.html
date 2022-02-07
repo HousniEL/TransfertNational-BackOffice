@@ -3,7 +3,7 @@
     <input
       type="text"
       class="form-control"
-      placeholder="Reference"
+      placeholder="Chercher par référence"
       aria-label="Nom"
       [(ngModel)]="reference"
       [ngClass]="{ 'is-invalid': invalidReference() }"
@@ -12,6 +12,7 @@
     <button
       title="Chercher"
       type="submit"
+      id="chercher-transfert"
       class="btn btn-primary"
       (click)="chercher()"
       style="margin-right: 4px"
