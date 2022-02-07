@@ -3,7 +3,7 @@
     <input
       type="text"
       class="form-control"
-      placeholder="Mots clés"
+      placeholder="Chercher par numéro de téléphone"
       aria-label="Nom"
       [(ngModel)]="recherche"
       [ngClass]="{ 'is-invalid': invalidRecherche() }"
@@ -11,6 +11,7 @@
     />
     <button
       type="submit"
+      id="chercher-phNum"
       class="btn btn-primary"
       (click)="chercher()"
       style="margin-right: 4px"

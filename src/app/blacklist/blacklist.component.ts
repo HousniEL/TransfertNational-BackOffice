@@ -47,13 +47,24 @@ export class BlacklistComponent implements OnInit {
   }
 
   chercher(){
+    var chercherBtn : any = document.getElementById("chercher-phNum");
+    chercherBtn.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
+    chercherBtn.setAttribute('disabled', true);
     this.errorRecherche="";
-    if(!this.recherche) this.errorRecherche="Champ vide!"
+    if(!this.recherche){
+      this.errorRecherche="Champ vide!";
+      chercherBtn.innerHTML = "Chercher";
+      chercherBtn.removeAttribute("disabled");
+    }
     else{
       this.blackService.getBlackListByPhoneNumber(this.recherche).subscribe( (val) => {
         this.Clients = [];
         this.Clients.push(val);
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
       }, (err) => {
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
         this.errorRecherche = err.error.error;
       })
     }
