@@ -59,6 +59,8 @@ export class AfficherInfoClientComponent implements OnInit {
     }
     else{
       this.clientService.getClientByCin(this.recherche).subscribe(val => {
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
         this.router.navigate(['clients-list/'+this.recherche]);
       }, err => {
         this.errorRecherche = err.error.error;
